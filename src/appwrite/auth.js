@@ -13,10 +13,13 @@ export class AuthService {
         this.account = new Account(this.client);
             
     }
-
-    async createAccount({email, password, name}) {
+    
+    async createAccount({email, password}) {
         try {
-            const userAccount = await this.account.create(ID.unique(), email, password, name);
+            console.log(email);
+            console.log(password);
+
+            const userAccount = await this.account.create(ID.unique(), email, password);
             if (userAccount) {
                 // call another method
                 return this.login({email, password});
@@ -30,7 +33,38 @@ export class AuthService {
 
     async login({email, password}) {
         try {
-            return await this.account.createEmailSession(email, password);
+            await this.account.createEmailSession(email, password);
+            this.emailverification(email);
+        } catch (error) {
+            throw error;
+        }
+    }
+    async emailverification(email) {
+        try {
+            const emailverification = await this.account.createVerification('http://127.0.0.1:5173/signup');
+
+            if (emailverification) {
+                // call another method
+                console.log("sent");
+                this.completeverification;
+                
+            } else {
+               return  userAccount;
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
+    async completeverification() {
+        try {
+            const urlParams = new URLSearchParams(window.location.search);
+            const secret = urlParams.get('secret');
+            const userId = urlParams.get('userId');
+
+
+            this.account.updateVerification(userId, secret);
+
+
         } catch (error) {
             throw error;
         }

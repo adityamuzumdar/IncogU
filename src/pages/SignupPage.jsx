@@ -1,4 +1,4 @@
-import Header from "../components/Header";
+import Header from "../components/LSHeader";
 import Signup from "../components/Signup";
 
 export default function SignupPage(){
@@ -8,7 +8,7 @@ export default function SignupPage(){
               heading="Signup to create an account"
               paragraph="Already have an account? "
               linkName="Login"
-              linkUrl="/"
+              linkUrl="/login"
             />
             <Signup/>
         </>

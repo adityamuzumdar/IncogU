@@ -1,4 +1,4 @@
-
+import authService from '../appwrite/auth';
 import { useState } from 'react';
 import { signupFields1 } from "../constants/formFields"
 import FormAction from "./FormAction";
@@ -16,14 +16,25 @@ export default function Signup(){
 
   const handleSubmit=(e)=>{
     e.preventDefault();
-    console.log(signupState)
-    createAccount()
+    const email = e.target.email.value;
+    const password=e.target.password.value;
+    const takeuni = (email) => {
+        const atIndex = email.indexOf('@');
+        const dotIndex = email.indexOf('.', atIndex);
+
+        if (atIndex !== -1 && dotIndex !== -1) {
+            const extractedText = email.substring(atIndex + 1, dotIndex);
+            return extractedText;
+        } else {
+            
+            return 'Invalid email format';
+        }
+    };
+    authService.createAccount({email,password});
   }
 
   //handle Signup API Integration here
-  const createAccount=()=>{
-
-  }
+  
 
     return(
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>

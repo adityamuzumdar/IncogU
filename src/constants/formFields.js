@@ -31,6 +31,16 @@ const signupFields1=[
         isRequired:true,
         placeholder:"University Email"   
     },
+    {
+        labelText:"Password",
+        labelFor:"password",
+        id:"password",
+        name:"password",
+        type:"password",
+        autoComplete:"current-password",
+        isRequired:true,
+        placeholder:"Password"   
+    },
 ]
 const signupFields2=[
     {

@@ -1,4 +1,4 @@
-import Header from "../components/Header"
+import Header from "../components/LSHeader"
 import Login from "../components/Login"
 
 export default function LoginPage(){

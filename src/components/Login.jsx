@@ -3,6 +3,10 @@ import { loginFields } from "../constants/formFields";
 import FormAction from "./FormAction";
 import FormExtra from "./FormExtra";
 import Input from "./Input";
+import authService from '../appwrite/auth';
+import {useDispatch} from "react-redux"
+import { login as authLogin } from '../store/authSlice'
+
 
 const fields=loginFields;
 let fieldsState = {};
@@ -17,13 +21,26 @@ export default function Login(){
 
     const handleSubmit=(e)=>{
         e.preventDefault();
-        authenticateUser();
+        const email = e.target.email.value;
+        const password=e.target.password.value;
+        login(email,password);
     }
 
     //Handle Login API Integration here
-    const authenticateUser = () =>{
+    const login = async(email,password) => {
 
+        try {
+            const session = await authService.login({email,password})
+            if (session) {
+                const userData = await authService.getCurrentUser()
+                if(userData) dispatch(authLogin(userData));
+                navigate("/")
+            }
+        } catch (error) {
+            setError(error.message)
+        }
     }
+
 
     return(
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
