@@ -22,7 +22,7 @@ export class AuthService {
             const userAccount = await this.account.create(ID.unique(), email, password);
             if (userAccount) {
                 // call another method
-                return this.login({email, password});
+                return this.verification({email,password});
             } else {
                return  userAccount;
             }
@@ -31,10 +31,25 @@ export class AuthService {
         }
     }
 
-    async login({email, password}) {
+    async verification({email,password}) {
         try {
             await this.account.createEmailSession(email, password);
-            this.emailverification(email);
+            const emailverification = await this.account.createVerification('http://127.0.0.1:5173/verify');
+            if (emailverification) {
+                // call another method
+                console.log("sent");
+                this.completeverification;
+                
+            } else {
+               return  userAccount;
+            }
+        } catch (error) {
+            throw error;
+        }
+    }
+    async login({email, password}) {
+        try {
+            return await this.account.createEmailSession(email, password);
         } catch (error) {
             throw error;
         }
@@ -46,7 +61,7 @@ export class AuthService {
             if (emailverification) {
                 // call another method
                 console.log("sent");
-                this.completeverification;
+                // this.completeverification;
                 
             } else {
                return  userAccount;
@@ -61,7 +76,7 @@ export class AuthService {
             const secret = urlParams.get('secret');
             const userId = urlParams.get('userId');
 
-
+            console.log("i am in completeverification")
             this.account.updateVerification(userId, secret);
 
 
