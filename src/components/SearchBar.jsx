@@ -9,7 +9,7 @@ const SearchBar = () => {
       <input
         type="text"
         placeholder="Search"
-        className="border border-black p-2 pl-10 m-2 rounded-full w-full "  // Adjusted the width
+        className="border border-black p-3 pl-10 m-2 rounded-full w-full "  // Adjusted the width
       />
     </div>
   );
