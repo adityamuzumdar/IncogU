@@ -5,6 +5,7 @@ import authService from '../appwrite/auth';
 import MHeader from '../components/MHeader';
 import Sidebar from '../components/Sidebar';
 import MainContent from '../components/MainContent';
+import { Link } from 'react-router-dom';
 
 function HomePage() {
   const [loading, setLoading] = useState(true);
@@ -46,7 +47,13 @@ function HomePage() {
 return (
   <>
     {loading ? (
-      <p>Loading...</p>
+       <div className="mb-10">
+            
+       <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+           Loading...
+       </h2>
+      
+     </div>
     ) : (
       <>
         {userData ? (
@@ -58,7 +65,19 @@ return (
             </div>
           </div>
         ) : (
-          <p>Not Logged In</p>
+
+          <div className="mb-10">
+            
+            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                You are not logged in.
+            </h2>
+            <p className="mt-2 text-center text-sm text-gray-600">
+            Already have an account? {' '}
+            <Link to='/login' className="font-medium text-blue-600 hover:text-blue-500">
+                Login
+            </Link>
+            </p>
+          </div>
         )}
       </>
     )}
