@@ -2,7 +2,7 @@ import React from 'react';
 
 const Sidebar = ({ onAddPostClick, collegeNames }) => {
   return (
-    <div className="w-1/4 bg-gray-200 p-4">
+    <div className="w-1/6 bg-gray-200 p-4">
       <button onClick={onAddPostClick} className="bg-blue-500 text-white p-2 mb-4">
         Add Post
       </button>

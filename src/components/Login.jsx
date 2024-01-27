@@ -16,7 +16,7 @@ fields.forEach(field=>fieldsState[field.id]='');
 export default function Login(){
     const navigate = useNavigate()
     const [loginState,setLoginState]=useState(fieldsState);
-
+    const [error, setError] = useState("")
     const handleChange=(e)=>{
         setLoginState({...loginState,[e.target.id]:e.target.value})
     }
@@ -30,7 +30,7 @@ export default function Login(){
 
     //Handle Login API Integration here
     const login = async(email,password) => {
-
+        setError("")
         try {
             
             const session = await authService.login({email,password})
@@ -44,6 +44,7 @@ export default function Login(){
                
             }
         } catch (error) {
+            setError(error.message)
             console.log(error)
         }
     }
@@ -51,6 +52,7 @@ export default function Login(){
 
     return(
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+            {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
         <div className="-space-y-px">
             {
                 fields.map(field=>
