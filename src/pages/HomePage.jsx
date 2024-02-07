@@ -72,7 +72,21 @@ const handleSavePost = async () => {
     console.log(userId) // Assuming user data has an 'id' property
     const status = 'active'; // You can set it to 'published' or 'draft' based on your logic
     const slug = postTitle; // You may generate a slug based on the title or use a library for this
+    const email=userData.email;
+    function getcollege(email){
+      const atIndex = email.indexOf('@');
+      const dotIndex = email.indexOf('.', atIndex);
 
+      if (atIndex !== -1 && dotIndex !== -1) {
+          const extractedText = email.substring(atIndex + 1, dotIndex);
+          return extractedText;
+      } else {
+          
+          return 'Invalid email format';
+      }
+  };
+  const college=getcollege(email);
+  console.log(college);
     // Prepare the post data
     const postData = {
       title: postTitle,
@@ -82,6 +96,7 @@ const handleSavePost = async () => {
       status,
       // Add a dummy URL for the featured image
       featuredImage: 'https://example.com/image.jpg',
+      college: college,
     };
 
     // Call the createPost function to save the post
@@ -116,7 +131,7 @@ const handleSavePost = async () => {
         </div>
       ) : (
         <>
-          {userData ? (
+          {userData && userData.emailVerification ? (
             <div>
               <MHeader />
               <div className="flex">
@@ -177,3 +192,6 @@ const handleSavePost = async () => {
 }
 
 export default HomePage;
+
+//adityamuzumdar
+//adityamuzumdar11@gmail.com

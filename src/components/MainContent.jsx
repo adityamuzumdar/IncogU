@@ -39,7 +39,9 @@ function MainContent() {
           {posts.map((post) => (
             <div key={post.$id} className="mb-4">
               <h3 className="text-xl font-semibold">{post.title}</h3>
+              <div className="text-slate-600">{post.college}</div>
               <div dangerouslySetInnerHTML={renderHTML(post.content)} />
+              
               {/* Add other post details as needed */}
             </div>
           ))}

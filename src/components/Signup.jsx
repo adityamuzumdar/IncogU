@@ -18,6 +18,11 @@ export default function Signup(){
     e.preventDefault();
     const email = e.target.email.value;
     const password=e.target.password.value;
+    const isValidEmail = (email) => {
+      // Define a regular expression pattern for allowed email domains
+      const allowedDomainsPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.(ac\.in|edu)$/i;
+      return allowedDomainsPattern.test(email.trim());
+    };
     const takeuni = (email) => {
         const atIndex = email.indexOf('@');
         const dotIndex = email.indexOf('.', atIndex);
@@ -30,7 +35,7 @@ export default function Signup(){
             return 'Invalid email format';
         }
     };
-    authService.createAccount({email,password});
+    if(isValidEmail(email)) authService.createAccount({email,password});
   }
 
   //handle Signup API Integration here
