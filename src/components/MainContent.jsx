@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import appwriteService from '../appwrite/config';
 
 function MainContent() {
@@ -37,13 +39,15 @@ function MainContent() {
         <div>
           <h2 className="text-2xl font-semibold mb-4">Recent Posts</h2>
           {posts.map((post) => (
-            <div key={post.$id} className="mb-4">
-              <h3 className="text-xl font-semibold">{post.title}</h3>
-              <div className="text-slate-600">{post.college}</div>
-              <div dangerouslySetInnerHTML={renderHTML(post.content)} />
-              
-              {/* Add other post details as needed */}
-            </div>
+            <Link key={post.$id} to={`/${post.$id}`} className="post-link">
+              <div className="mb-4">
+                <h3 className="text-xl font-semibold">{post.title}</h3>
+                <div className="text-blue-400">{post.college}</div>
+                <div dangerouslySetInnerHTML={renderHTML(post.content)} />
+                
+                {/* Add other post details as needed */}
+              </div>
+            </Link>
           ))}
         </div>
       )}

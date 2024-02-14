@@ -39,9 +39,7 @@ export default function Login(){
 
                 const userData = await authService.getCurrentUser()
                 // if(userData) dispatch(authLogin(userData));
-                if(userData)  navigate("/");
-
-               
+                if(userData)  navigate("/");               
             }
         } catch (error) {
             setError(error.message)

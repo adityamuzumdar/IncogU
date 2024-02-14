@@ -11,11 +11,12 @@ fields.forEach(field => fieldsState[field.id]='');
 
 export default function Signup(){
   const [signupState,setSignupState]=useState(fieldsState);
-
+  const [error, setError] = useState("")
   const handleChange=(e)=>setSignupState({...signupState,[e.target.id]:e.target.value});
 
   const handleSubmit=(e)=>{
     e.preventDefault();
+    setError("")
     const email = e.target.email.value;
     const password=e.target.password.value;
     const isValidEmail = (email) => {
@@ -36,6 +37,7 @@ export default function Signup(){
         }
     };
     if(isValidEmail(email)) authService.createAccount({email,password});
+    else setError("Email not valid")
   }
 
   //handle Signup API Integration here
@@ -43,6 +45,7 @@ export default function Signup(){
 
     return(
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
         <div className="">
         {
                 fields.map(field=>

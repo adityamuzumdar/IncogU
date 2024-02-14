@@ -58,6 +58,7 @@ export class Service{
             await this.databases.deleteDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
+                
                 slug
             
             )
@@ -73,8 +74,7 @@ export class Service{
             return await this.databases.getDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
-                slug
-            
+                slug,
             )
         } catch (error) {
             console.log("Appwrite serive :: getPost :: error", error);
